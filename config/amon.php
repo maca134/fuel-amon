@@ -1,13 +1,15 @@
 <?php
+
 /**
  * Amon: Integrate FuelPHP with Amon Exception & Logging
  *
  * @package    Amon
  * @version    v0.1
- * @author     Matthew McConnell & James Mallison
+ * @author     Matthew McConnell
  * @license    MIT License
  * @link       http://github.com/maca134/fuelphp-amon
  */
+
  
 return array(
 	/*

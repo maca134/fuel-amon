@@ -5,10 +5,11 @@
  *
  * @package    Amon
  * @version    v0.1
- * @author     Matthew McConnell & James Mallison
+ * @author     Matthew McConnell
  * @license    MIT License
  * @link       http://github.com/maca134/fuelphp-amon
  */
+
 Autoloader::add_core_namespace('Amon');
 
 Autoloader::add_classes(array(

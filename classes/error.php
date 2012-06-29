@@ -5,10 +5,11 @@
  *
  * @package    Amon
  * @version    v0.1
- * @author     Matthew McConnell & James Mallison
+ * @author     Matthew McConnell
  * @license    MIT License
  * @link       http://github.com/maca134/fuelphp-amon
  */
+
 
 namespace Amon;
 
@@ -104,7 +105,7 @@ class Error extends \Fuel\Core\Error {
 
 class Amon_Php_Exception extends \ErrorException {
 
-    function __construct($errstr, $errno, $errfile, $errline) {
+    public function __construct($errstr, $errno, $errfile, $errline) {
         parent::__construct($errstr, 0, $errno, $errfile, $errline);
     }
 
