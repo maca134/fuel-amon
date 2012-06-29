@@ -10,3 +10,5 @@ fuel/app/logs/*/*/*
 fuel/app/cache/*/*
 nbproject/
 .idea
+/.hgignore
+/.hgtags
