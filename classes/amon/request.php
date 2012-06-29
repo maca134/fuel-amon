@@ -8,7 +8,7 @@ class Amon_Request {
     protected static $driver;
 
     /**
-     *
+     * Init, config loading.
      * @throws Amon_Request_Exception 
      */
     public static function _init() {
@@ -21,12 +21,16 @@ class Amon_Request {
         if (!class_exists($class)) {
             throw new Amon_Request_Exception('Can not find request driver');
         }
-        static::$driver = new $class(static::$config['host'], static::$config['port'], static::$config['application_key']);
+		
+		try {
+			static::$driver = new $class(static::$config['host'], static::$config['port'], static::$config['application_key']);
+		} catch (Amon_Request_Exception $e) {
+			throw $e;
+		}
     }
     
-    
     /**
-     *
+     * Sends a request to Amon
      * @param array $data
      * @param string $type
      * @throws Amon_Request_Exception 
@@ -40,6 +44,4 @@ class Amon_Request {
 
 }
 
-class Amon_Request_Exception extends \FuelException {
-    
-}
+class Amon_Request_Exception extends \FuelException { }

@@ -22,10 +22,8 @@ class Log extends \Fuel\Core\Log {
      * @return  bool    If it was successfully logged
      */
     public static function info($msg, $method = null) {
-        $tags = array();
-        if ($method !== null)
-            $tags = array_merge($tags, array($method));
-        $tags = array_merge($tags, array('info'));
+        $tags = array(__METHOD__);
+        $tags = ($method !== null) ? array_merge($tags, array($method)) : array();
         static::amon($msg, $tags);
         return parent::write($msg, $method);
     }
@@ -38,10 +36,8 @@ class Log extends \Fuel\Core\Log {
      * @return  bool    If it was successfully logged
      */
     public static function debug($msg, $method = null) {
-        $tags = array();
-        if ($method !== null)
-            $tags = array_merge($tags, array($method));
-        $tags = array_merge($tags, array('debug'));
+        $tags = array(__METHOD__);
+        $tags = ($method !== null) ? array_merge($tags, array($method)) : array();
         static::amon($msg, $tags);
         return parent::write($msg, $method);
     }
@@ -54,10 +50,8 @@ class Log extends \Fuel\Core\Log {
      * @return  bool    If it was successfully logged
      */
     public static function warning($msg, $method = null) {
-        $tags = array();
-        if ($method !== null)
-            $tags = array_merge($tags, array($method));
-        $tags = array_merge($tags, array('warning'));
+        $tags = array(__METHOD__);
+        $tags = ($method !== null) ? array_merge($tags, array($method)) : array();
         static::amon($msg, $tags);
         return parent::write($msg, $method);
     }
@@ -70,10 +64,8 @@ class Log extends \Fuel\Core\Log {
      * @return  bool    If it was successfully logged
      */
     public static function error($msg, $method = null) {
-        $tags = array();
-        if ($method !== null)
-            $tags = array_merge($tags, array($method));
-        $tags = array_merge($tags, array('error'));
+        $tags = array(__METHOD__);
+        $tags = ($method !== null) ? array_merge($tags, array($method)) : array();
         static::amon($msg, $tags);
         return parent::write($msg, $method);
     }

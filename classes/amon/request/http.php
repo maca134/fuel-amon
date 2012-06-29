@@ -43,7 +43,7 @@ class Amon_Request_Http {
         $response = @stream_get_contents($fp);
 
         if (!$fp) {
-            return false;
+            throw new Amon_Request_Http_Exception('Can not open ' . $url);
         }
 
         if ($response === false) {
@@ -60,12 +60,8 @@ class Amon_Request_Http {
             'status' => 'ok',
             'header' => $header,
             'content' => $content,
-            'params' => $params,
-            'url' => $url,
-            'response' => $response
         );
     }
 
 }
-class Amon_Http_Exception extends \FuelException {
-}
+class Amon_Request_Http_Exception extends Amon_Request_Exception {}

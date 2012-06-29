@@ -110,22 +110,12 @@ class Amon_Php_Exception extends \ErrorException {
 
 }
 
-class Amon_Php_Error extends Amon_Php_Exception {
-    
-}
+class Amon_Php_Error extends Amon_Php_Exception { }
 
-class Amon_Php_Warning extends Amon_Php_Exception {
-    
-}
+class Amon_Php_Warning extends Amon_Php_Exception { }
 
-class Amon_Php_Strict extends Amon_Php_Exception {
-    
-}
+class Amon_Php_Strict extends Amon_Php_Exception { }
 
-class Amon_Php_Parse extends Amon_Php_Exception {
-    
-}
+class Amon_Php_Parse extends Amon_Php_Exception { }
 
-class Amon_Php_Notice extends Amon_Php_Exception {
-    
-}
+class Amon_Php_Notice extends Amon_Php_Exception { }

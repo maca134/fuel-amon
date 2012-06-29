@@ -14,7 +14,11 @@ class Amon_Request_Zeromq {
         $this->port = $port;
         $this->key = $key;
         $context = new \ZMQContext();
-        $this->requester = new \ZMQSocket($context, \ZMQ::SOCKET_DEALER);
+		try {
+			$this->requester = new \ZMQSocket($context, \ZMQ::SOCKET_DEALER);
+		} catch (\ZMQSocketException $e) {
+			throw new Amon_Request_Zeromq_Exception($e->getMessage());
+		}
         $url = 'tcp://' . $this->host . ':' . $this->port;
         $this->requester->connect($url);
         $this->requester->setSockOpt(\ZMQ::SOCKOPT_LINGER, 0);
@@ -34,10 +38,8 @@ class Amon_Request_Zeromq {
         }
         $zeromq_data['content'] = $data;
         $zeromq_data['type'] = $type;
-        var_dump($zeromq_data);
-        die;
-
         $this->requester->send(json_encode($zeromq_data), \ZMQ::MODE_NOBLOCK);
     }
 
 }
+class Amon_Request_Zeromq_Exception extends Amon_Request_Exception {}
