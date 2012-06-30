@@ -1,0 +1,18 @@
+{
+    "name": "Maca134/fuel-cart",
+    "type": "package",
+    "description": "Amon package for FuelPHP",
+    "keywords": ["amon","fuelphp","log","error"],
+    "homepage": "https://github.com/maca134/fuel-amon",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthew McConnell",
+            "email": "maca134@googlemail.com",
+            "homepage": "http://maca134.co.uk"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    }
+}

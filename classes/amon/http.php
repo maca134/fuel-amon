@@ -1,19 +1,8 @@
 <?php
 
-/**
- * Amon: Integrate FuelPHP with Amon Exception & Logging
- *
- * @package    Amon
- * @version    v0.1
- * @author     Matthew McConnell
- * @license    MIT License
- * @link       http://github.com/maca134/fuelphp-amon
- */
-
-
 namespace Amon;
 
-class Amon_Request_Http {
+class Amon_Http {
 
 	private $host = '';
 	private $port = '';
@@ -54,7 +43,7 @@ class Amon_Request_Http {
         $response = @stream_get_contents($fp);
 
         if (!$fp) {
-            throw new Amon_Request_Http_Exception('Can not open ' . $url);
+            return false;
         }
 
         if ($response === false) {
@@ -71,8 +60,12 @@ class Amon_Request_Http {
             'status' => 'ok',
             'header' => $header,
             'content' => $content,
+            'params' => $params,
+            'url' => $url,
+            'response' => $response
         );
     }
 
 }
-class Amon_Request_Http_Exception extends Amon_Request_Exception {}
+class Amon_Http_Exception extends \FuelException {
+}
