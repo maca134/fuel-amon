@@ -1,5 +1,5 @@
 {
-    "name": "Maca134/fuel-cart",
+    "name": "Maca134/fuel-amon",
     "type": "package",
     "description": "Amon package for FuelPHP",
     "keywords": ["amon","fuelphp","log","error"],
