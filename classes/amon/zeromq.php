@@ -1,13 +1,46 @@
 <?php
+
+/**
+ * Amon: Integrate FuelPHP with Amon Exception & Logging
+ *
+ * @package    Amon
+ * @version    v0.1
+ * @author     Matthew McConnell
+ * @license    MIT License
+ * @link       http://github.com/maca134/fuelphp-amon
+ */
+ 
 namespace Amon;
 
 class Amon_Zeromq {
 
+	/**
+     * @var String Ip or hostname of the Amon instance.
+     */
     private $host = '';
-	private $port = '';
-	private $key = '';
+	
+	/**
+     * @var String Port of the Amon instance.
+     */
+    private $port = '';
+	
+	/**
+     * @var String Application key of the Amon instance.
+     */
+    private $key = '';
+	
+	/**
+     * @var ZMQSocket ZMQSocket object.
+     */
 	private $requester;
 	
+    /**
+     * Constructor
+     *
+     * @param Exception Exception to be parsed for Amon
+     *
+     * @return null
+     */
     public function __construct($host, $port, $key) {
         $this->host = $host;
 		$this->port = $port;
@@ -32,9 +65,6 @@ class Amon_Zeromq {
 		}
 		$zeromq_data['content'] = $data;
 		$zeromq_data['type'] = $type;
-		var_dump($zeromq_data); 
-		die;
-		
-        $this->requester->send(json_encode($zeromq_data), \ZMQ::MODE_NOBLOCK);
+		$this->requester->send(json_encode($zeromq_data), \ZMQ::MODE_NOBLOCK);
     }
 }

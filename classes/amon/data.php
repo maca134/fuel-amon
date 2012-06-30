@@ -10,7 +10,6 @@
  * @link       http://github.com/maca134/fuelphp-amon
  */
 
-
 namespace Amon;
 
 class Amon_Data {

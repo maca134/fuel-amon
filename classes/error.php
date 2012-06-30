@@ -12,6 +12,31 @@
 
 namespace Amon;
 
+/**
+ * Exception for PHP errors.
+ */
+class Amon_Php_Exception extends \FuelException {
+
+    public function __construct($errstr, $errno, $errfile, $errline) {
+        parent::__construct($errstr, 0, $errno, $errfile, $errline);
+    }
+
+}
+
+/**
+ * Exception for PHP error levels.
+ */
+class Amon_Php_Error extends Amon_Php_Exception {}
+
+class Amon_Php_Warning extends Amon_Php_Exception {}
+
+class Amon_Php_Strict extends Amon_Php_Exception {}
+
+class Amon_Php_Parse extends Amon_Php_Exception {}
+
+class Amon_Php_Notice extends Amon_Php_Exception {}
+
+
 class Error extends \Fuel\Core\Error {
 
     /**
@@ -101,21 +126,3 @@ class Error extends \Fuel\Core\Error {
     }
 
 }
-
-class Amon_Php_Exception extends \ErrorException {
-
-    public function __construct($errstr, $errno, $errfile, $errline) {
-        parent::__construct($errstr, 0, $errno, $errfile, $errline);
-    }
-
-}
-
-class Amon_Php_Error extends Amon_Php_Exception { }
-
-class Amon_Php_Warning extends Amon_Php_Exception { }
-
-class Amon_Php_Strict extends Amon_Php_Exception { }
-
-class Amon_Php_Parse extends Amon_Php_Exception { }
-
-class Amon_Php_Notice extends Amon_Php_Exception { }

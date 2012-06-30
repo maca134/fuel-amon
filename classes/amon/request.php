@@ -10,12 +10,18 @@
  * @link       http://github.com/maca134/fuelphp-amon
  */
 
-
 namespace Amon;
 
 class Amon_Request {
 
+    /**
+     * @var Array Stored the request config.
+     */
     protected static $config = array();
+    
+	/**
+     * @var Mixed Stored the request driver.
+     */
     protected static $driver;
 
     /**

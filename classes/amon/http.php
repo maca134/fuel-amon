@@ -1,13 +1,43 @@
 <?php
 
+/**
+ * Amon: Integrate FuelPHP with Amon Exception & Logging
+ *
+ * @package    Amon
+ * @version    v0.1
+ * @author     Matthew McConnell
+ * @license    MIT License
+ * @link       http://github.com/maca134/fuelphp-amon
+ */
+ 
 namespace Amon;
+
+class Amon_Http_Exception extends \FuelException {}
 
 class Amon_Http {
 
-	private $host = '';
-	private $port = '';
-	private $key = '';
+	/**
+     * @var String Ip or hostname of the Amon instance.
+     */
+    private $host = '';
 	
+	/**
+     * @var String Port of the Amon instance.
+     */
+    private $port = '';
+	
+	/**
+     * @var String Application key of the Amon instance.
+     */
+    private $key = '';
+	
+    /**
+     * Constructor
+     *
+     * @param Exception Exception to be parsed for Amon
+     *
+     * @return null
+     */
     public function __construct($host, $port, $key) {
         $this->host = $host;
 		$this->port = $port;
@@ -66,6 +96,4 @@ class Amon_Http {
         );
     }
 
-}
-class Amon_Http_Exception extends \FuelException {
 }
