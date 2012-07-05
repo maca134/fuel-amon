@@ -12,23 +12,24 @@
 
 namespace Amon;
 
-class Amon_Request {
-
+class Amon_Request
+{
     /**
      * @var Array Stored the request config.
      */
     protected static $config = array();
-    
-	/**
+
+    /**
      * @var Mixed Stored the request driver.
      */
     protected static $driver;
 
     /**
      * Init, config loading.
-     * @throws Amon_Request_Exception 
+     * @throws Amon_Request_Exception
      */
-    public static function _init() {
+    public static function _init()
+    {
         \Config::load('amon', true);
         static::$config = \Config::get('amon');
         if (!class_exists('\ZMQContext')) {
@@ -38,21 +39,22 @@ class Amon_Request {
         if (!class_exists($class)) {
             throw new Amon_Request_Exception('Can not find request driver');
         }
-		
-		try {
-			static::$driver = new $class(static::$config['host'], static::$config['port'], static::$config['application_key']);
-		} catch (Amon_Request_Exception $e) {
-			throw $e;
-		}
+
+        try {
+            static::$driver = new $class(static::$config['host'], static::$config['port'], static::$config['application_key']);
+        } catch (Amon_Request_Exception $e) {
+            throw $e;
+        }
     }
-    
+
     /**
      * Sends a request to Amon
-     * @param array $data
-     * @param string $type
-     * @throws Amon_Request_Exception 
+     * @param  array                  $data
+     * @param  string                 $type
+     * @throws Amon_Request_Exception
      */
-    public static function request(array $data, $type = 'exception') {
+    public static function request(array $data, $type = 'exception')
+    {
         if ($type != 'exception' && $type != 'log') {
             throw new Amon_Request_Exception('Request type can only be exception or log');
         }

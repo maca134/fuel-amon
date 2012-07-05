@@ -12,8 +12,8 @@
 
 namespace Amon;
 
-class Amon_Data {
-
+class Amon_Data
+{
     /**
      * @var Exception Store the exception to be parsed for Amon.
      */
@@ -36,7 +36,8 @@ class Amon_Data {
      *
      * @return null
      */
-    public function __construct(\Exception $exception) {
+    public function __construct(\Exception $exception)
+    {
         $this->exception = $exception;
 
         $trace = $this->exception->getTrace();
@@ -75,7 +76,6 @@ class Amon_Data {
             $keys = array('HTTPS', 'HTTP_HOST', 'REQUEST_URI', 'REQUEST_METHOD', 'REMOTE_ADDR');
             $this->fill_keys($server, $keys);
 
-
             $protocol = $server['HTTPS'] && $server['HTTPS'] != 'off' ? 'https://' : 'http://';
             $url = $server['HTTP_HOST'] ? "{$protocol}{$server['HTTP_HOST']}{$server['REQUEST_URI']}" : "";
 
@@ -101,10 +101,11 @@ class Amon_Data {
      * Selects certain keys from associative array
      *
      * @param array &$arr Associative array to be processed
-     * @param array $keys Keys to be returned
+     * @param  array $keys Keys to be returned
      * @return void
      */
-    private function fill_keys(&$arr, $keys) {
+    private function fill_keys(&$arr, $keys)
+    {
         foreach ($keys as $key) {
             if (!isset($arr[$key])) {
                 $arr[$key] = false;
@@ -117,7 +118,8 @@ class Amon_Data {
      *
      * @return array An array containing HTTP request headers
      */
-    private function getallheaders() {
+    private function getallheaders()
+    {
         if (function_exists('getallheaders')) {
             return getallheaders();
         } else {
@@ -127,6 +129,7 @@ class Amon_Data {
                     $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
                 }
             }
+
             return $headers;
         }
     }

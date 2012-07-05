@@ -9,28 +9,28 @@
  * @license    MIT License
  * @link       http://github.com/maca134/fuelphp-amon
  */
- 
+
 namespace Amon;
 
 class Amon_Http_Exception extends \FuelException {}
 
-class Amon_Http {
-
-	/**
+class Amon_Http
+{
+    /**
      * @var String Ip or hostname of the Amon instance.
      */
     private $host = '';
-	
-	/**
+
+    /**
      * @var String Port of the Amon instance.
      */
     private $port = '';
-	
-	/**
+
+    /**
      * @var String Application key of the Amon instance.
      */
     private $key = '';
-	
+
     /**
      * Constructor
      *
@@ -38,10 +38,11 @@ class Amon_Http {
      *
      * @return null
      */
-    public function __construct($host, $port, $key) {
+    public function __construct($host, $port, $key)
+    {
         $this->host = $host;
-		$this->port = $port;
-		$this->key = $key;
+        $this->port = $port;
+        $this->key = $key;
     }
     /**
      * Make request
@@ -52,8 +53,8 @@ class Amon_Http {
      *
      * @return array
      */
-    public function request(array $data, $type = 'exception') {
-
+    public function request(array $data, $type = 'exception')
+    {
         $params = array(
             'http' => array(
                 'header' => 'Content-Type: application/x-www-form-urlencoded' . "\r\n",
@@ -62,10 +63,10 @@ class Amon_Http {
                 'timeout' => 5,
             )
         );
-		
-		$context = stream_context_create($params);
-		$url = 'http://' . $this->host . ':' . $this->port . '/api/' . $type;
-		if (!empty($this->key)) {
+
+        $context = stream_context_create($params);
+        $url = 'http://' . $this->host . ':' . $this->port . '/api/' . $type;
+        if (!empty($this->key)) {
             $url = sprintf("%s/%s", $url, $this->key);
         }
         $fp = fopen($url, 'rb', false, $context);

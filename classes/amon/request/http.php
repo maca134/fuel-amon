@@ -10,19 +10,19 @@
  * @link       http://github.com/maca134/fuelphp-amon
  */
 
-
 namespace Amon;
 
-class Amon_Request_Http {
+class Amon_Request_Http
+{
+    private $host = '';
+    private $port = '';
+    private $key = '';
 
-	private $host = '';
-	private $port = '';
-	private $key = '';
-	
-    public function __construct($host, $port, $key) {
+    public function __construct($host, $port, $key)
+    {
         $this->host = $host;
-		$this->port = $port;
-		$this->key = $key;
+        $this->port = $port;
+        $this->key = $key;
     }
     /**
      * Make request
@@ -33,8 +33,8 @@ class Amon_Request_Http {
      *
      * @return array
      */
-    public function request(array $data, $type = 'exception') {
-
+    public function request(array $data, $type = 'exception')
+    {
         $params = array(
             'http' => array(
                 'header' => 'Content-Type: application/x-www-form-urlencoded' . "\r\n",
@@ -43,10 +43,10 @@ class Amon_Request_Http {
                 'timeout' => 5,
             )
         );
-		
-		$context = stream_context_create($params);
-		$url = 'http://' . $this->host . ':' . $this->port . '/api/' . $type;
-		if (!empty($this->key)) {
+
+        $context = stream_context_create($params);
+        $url = 'http://' . $this->host . ':' . $this->port . '/api/' . $type;
+        if (!empty($this->key)) {
             $url = sprintf("%s/%s", $url, $this->key);
         }
         $fp = fopen($url, 'rb', false, $context);

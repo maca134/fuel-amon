@@ -15,9 +15,10 @@ namespace Amon;
 /**
  * Exception for PHP errors.
  */
-class Amon_Php_Exception extends \FuelException {
-
-    public function __construct($errstr, $errno, $errfile, $errline) {
+class Amon_Php_Exception extends \FuelException
+{
+    public function __construct($errstr, $errno, $errfile, $errline)
+    {
         parent::__construct($errstr, 0, $errno, $errfile, $errline);
     }
 
@@ -36,16 +37,16 @@ class Amon_Php_Parse extends Amon_Php_Exception {}
 
 class Amon_Php_Notice extends Amon_Php_Exception {}
 
-
-class Error extends \Fuel\Core\Error {
-
+class Error extends \Fuel\Core\Error
+{
     /**
      * Amon Exception handler
      *
-     * @param   Exception  $e  the exception
-     * @return  bool
+     * @param  Exception $e the exception
+     * @return bool
      */
-    public static function exception_handler(\Exception $e) {
+    public static function exception_handler(\Exception $e)
+    {
         self::handle_exception($e);
         $return = parent::exception_handler($e);
         if ($return !== null) {
@@ -56,13 +57,14 @@ class Error extends \Fuel\Core\Error {
     /**
      * Amon Error handler
      *
-     * @param   int     $severity  the severity code
-     * @param   string  $message   the error message
-     * @param   string  $filepath  the path to the file throwing the error
-     * @param   int     $line      the line number of the error
-     * @return  bool    whether to continue with execution
+     * @param  int    $severity the severity code
+     * @param  string $message  the error message
+     * @param  string $filepath the path to the file throwing the error
+     * @param  int    $line     the line number of the error
+     * @return bool   whether to continue with execution
      */
-    public static function error_handler($severity, $message, $filepath, $line) {
+    public static function error_handler($severity, $message, $filepath, $line)
+    {
         switch ($severity) {
             case E_NOTICE:
             case E_USER_NOTICE:
@@ -86,15 +88,17 @@ class Error extends \Fuel\Core\Error {
                 $e = new Amon_Php_Error($message, $severity, $filepath, $line);
         }
         self::handle_exception($e);
+
         return parent::error_handler($severity, $message, $filepath, $line);
     }
 
     /**
      * Amon PHP shutdown handler
      *
-     * @return  void
+     * @return void
      */
-    public static function shutdown_handler() {
+    public static function shutdown_handler()
+    {
         $last_error = error_get_last();
 
         // Only show valid fatal errors
@@ -117,10 +121,11 @@ class Error extends \Fuel\Core\Error {
     /**
      * Amon Exception handler
      *
-     * @param   Exception  $e  the exception
-     * @return  bool
+     * @param  Exception $e the exception
+     * @return bool
      */
-    private static function handle_exception($exception) {
+    private static function handle_exception($exception)
+    {
         $data = new Amon_Data($exception);
         Amon_Request::request($data->data, 'exception');
     }
