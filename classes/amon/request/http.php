@@ -12,18 +12,18 @@
 
 namespace Amon;
 
-class Amon_Request_Http
-{
+class Amon_Request_Http {
+
     private $host = '';
     private $port = '';
     private $key = '';
 
-    public function __construct($host, $port, $key)
-    {
+    public function __construct($host, $port, $key) {
         $this->host = $host;
         $this->port = $port;
         $this->key = $key;
     }
+
     /**
      * Make request
      *
@@ -33,8 +33,7 @@ class Amon_Request_Http
      *
      * @return array
      */
-    public function request(array $data, $type = 'exception')
-    {
+    public function request(array $data, $type = 'exception') {
         $params = array(
             'http' => array(
                 'header' => 'Content-Type: application/x-www-form-urlencoded' . "\r\n",
@@ -49,16 +48,14 @@ class Amon_Request_Http
         if (!empty($this->key)) {
             $url = sprintf("%s/%s", $url, $this->key);
         }
-        $fp = fopen($url, 'rb', false, $context);
-
-        $response = @stream_get_contents($fp);
-
+        $fp = @fopen($url, 'rb', false, $context);
         if (!$fp) {
             throw new Amon_Request_Http_Exception('Can not open ' . $url);
         }
 
-        if ($response === false) {
-            $error = sprintf('Problem sending POST to %s', $url);
+        $response = stream_get_contents($fp);
+        if (!$response) {
+            throw new Amon_Request_Http_Exception('Problem sending POST');
         }
 
         // split the result header from the content
@@ -75,4 +72,7 @@ class Amon_Request_Http
     }
 
 }
-class Amon_Request_Http_Exception extends Amon_Request_Exception {}
+
+class Amon_Request_Http_Exception extends Amon_Request_Exception {
+    
+}

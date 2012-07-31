@@ -12,8 +12,8 @@
 
 namespace Amon;
 
-class Amon_Request
-{
+class Amon_Request {
+
     /**
      * @var Array Stored the request config.
      */
@@ -28,8 +28,7 @@ class Amon_Request
      * Init, config loading.
      * @throws Amon_Request_Exception
      */
-    public static function _init()
-    {
+    public static function _init() {
         \Config::load('amon', true);
         static::$config = \Config::get('amon');
         if (!class_exists('\ZMQContext')) {
@@ -53,14 +52,21 @@ class Amon_Request
      * @param  string                 $type
      * @throws Amon_Request_Exception
      */
-    public static function request(array $data, $type = 'exception')
-    {
+    public static function request(array $data, $type = 'exception') {
         if ($type != 'exception' && $type != 'log') {
             throw new Amon_Request_Exception('Request type can only be exception or log');
         }
-        static::$driver->request($data, $type);
+        try {
+            static::$driver->request($data, $type);
+        } catch (Amon_Request_Http_Exception $e) {
+            
+        } catch (Amon_Request_Zeromq_Exception $e) {
+            
+        }
     }
 
 }
 
-class Amon_Request_Exception extends \FuelException { }
+class Amon_Request_Exception extends \FuelException {
+    
+}
